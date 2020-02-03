@@ -11,12 +11,8 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
     sorter = params[:sort]
-    if(sorter == "title")
-      # puts "sort == title"
-      sort_movies_alpha
-    end
+    @movies = Movie.all.order(sorter)
   end
   
   def new
