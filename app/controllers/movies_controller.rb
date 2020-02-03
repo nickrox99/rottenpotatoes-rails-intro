@@ -11,8 +11,11 @@ class MoviesController < ApplicationController
   end
 
   def index
+    # sort the movies based off of sort parameter
     sorter = params[:sort]
     @movies = Movie.all.order(sorter)
+    
+    # highlight selected header
     if(sorter == "title")
       @title_header = 'hilite'
     elsif (sorter == "release_date")
