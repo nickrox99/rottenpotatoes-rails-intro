@@ -12,8 +12,13 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    sorter = params[:sort]
+    if(sorter == "title")
+      # puts "sort == title"
+      sort_movies_alpha
+    end
   end
-
+  
   def new
     # default: render 'new' template
   end
@@ -42,10 +47,12 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
   
+  # sort the movies alphabetically
   def sort_movies_alpha
-    title = params[:title]
+    @movies.sort_by{|movie| movie.title}
   end
   
+  # sort the movies by release date
   def sort_movies_release_date
     
   end
