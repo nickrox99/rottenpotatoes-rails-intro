@@ -4,7 +4,7 @@
 %table#movies.table.table-striped.col-md-12
   %thead
     %tr
-      %th= "Movie Titles", { :controller => "movies", :action => "index", :sort => "title" }
+      %th=link_to "Movie Titles", { :controller => "movies", :action => "index", :sort => "title" }
       %th Rating
       %th=link_to "Release Date", {:controller => "movies", :action =>"index", :sort => "release_date"}
       %th More Info
