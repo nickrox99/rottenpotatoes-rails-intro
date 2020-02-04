@@ -13,9 +13,8 @@ class Movie < ActiveRecord::Base
             return self.uniq.pluck(:rating)
         end
         
-        def selected_ratings
-            
-            return self.where(:rating => @selected_ratings.keys)
+        def selected_ratings rater
+            return self.where(rating: rater.keys)
         end
     end
 end
