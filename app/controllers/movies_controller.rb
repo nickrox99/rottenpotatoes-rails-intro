@@ -11,9 +11,14 @@ class MoviesController < ApplicationController
   end
 
   def index
+    
+    base = Movie.all
     # sort the movies based off of sort parameter
-    sorter = params[:sort]
-    @movies = Movie.all.order(sorter)
+    if(params[:sort])
+      sorter = params[:sort]
+      @movies = base.order(sorter)
+    end
+    #@movies = Movie.all.order(sorter)
     
     # highlight selected header
     if(sorter == "title")
@@ -29,11 +34,8 @@ class MoviesController < ApplicationController
     
     if(params[:ratings])
       rater = params[:ratings]
-    end
-    logger.debug("The selected ratings are #{rater.keys}")
-    if(rater)
       @checked_ratings = rater
-      @movies = Movie.selected_ratings(rater)
+      @movies = base.selected_ratings(rater)
     end
       
   end
