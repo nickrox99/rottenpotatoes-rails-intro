@@ -2,12 +2,13 @@
 %h2 All Movies
 
 %table#movies.table.table-striped.col-md-12
-  %thead = form_tag movies_path, :method => :get do
-  Include:
-  - @all_ratings.each do |rating|
-    = rating
-    = check_box_tag "ratings[#{rating}]"
-  = submit_tag 'Refresh'
+  %thead 
+  %p= form_tag movies_path, :method => :get do
+    Include:
+    - @all_ratings.each do |rating|
+      = rating
+      = check_box_tag "ratings[#{rating}]"
+    = submit_tag 'Refresh'
     %tr
       %th{:class=>@title_header, :id=> "title_header"}= link_to "Movie Titles", { :controller => "movies", :action => "index", :sort => "title" }
       %th Rating
