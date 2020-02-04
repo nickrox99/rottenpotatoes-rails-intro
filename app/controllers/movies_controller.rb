@@ -26,6 +26,12 @@ class MoviesController < ApplicationController
     
     # set the @all_ratings item to the result of all_rating (unique results)
     @all_ratings = Movie.all_ratings
+    
+    rater = params[:rating]
+    if(rater)
+      @checked_ratings = rater
+      @movies = Movie.selected_ratings
+    end
       
   end
   

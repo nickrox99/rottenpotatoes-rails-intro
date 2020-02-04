@@ -11,7 +11,10 @@ class Movie < ActiveRecord::Base
                 # 3. https://stackoverflow.com/questions/9658881/rails-select-unique-values-from-a-column
             #return self.distinct.pluck(:rating)
             return self.uniq.pluck(:rating)
-            
         end
+        
+        def selected_ratings
+            
+            return self.where(:rating = @selected_ratings.key)
     end
 end
