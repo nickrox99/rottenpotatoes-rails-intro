@@ -30,7 +30,7 @@ class MoviesController < ApplicationController
     if(params[:rating])
       rater = params[:rating]
     end
-    logger.debug("The selected ratings are #{rater.keys}")
+    logger.debug("The selected ratings are #{rater}")
     if(rater)
       @checked_ratings = rater
       @movies = Movie.selected_ratings(rater)
