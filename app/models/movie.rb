@@ -15,6 +15,7 @@ class Movie < ActiveRecord::Base
         
         def selected_ratings
             
-            return self.where(:rating = @selected_ratings.key)
+            return self.where(:rating => @selected_ratings.keys)
+        end
     end
 end
