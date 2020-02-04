@@ -17,8 +17,10 @@ class MoviesController < ApplicationController
     
     # highlight selected header
     if(sorter == "title")
+      # set the title header class to hilite
       @title_header = 'hilite'
     elsif (sorter == "release_date")
+      # set the date header class to hilite
       @date_header = 'hilite'
     end
       
