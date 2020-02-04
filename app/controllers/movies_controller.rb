@@ -23,6 +23,9 @@ class MoviesController < ApplicationController
       # set the date header class to hilite
       @date_header = 'hilite'
     end
+    
+    # set the @all_ratings item to the result of all_rating (unique results)
+    @all_ratings = Movie.all_ratings
       
   end
   
@@ -52,16 +55,6 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
-  end
-  
-  # sort the movies alphabetically
-  def sort_movies_alpha
-    @movies.sort_by{|movie| movie.title}
-  end
-  
-  # sort the movies by release date
-  def sort_movies_release_date
-    
   end
 
 end
