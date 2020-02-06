@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     
+    
     # save the params ratings to session
     if(params[:ratings])
       session[:ratings] = params[:ratings]
@@ -23,6 +24,8 @@ class MoviesController < ApplicationController
     end
     
     base = Movie.all
+    @movies = base
+    
     # sort the movies based off of sort parameter
     if(session[:sort])
       sorter = session[:sort]
