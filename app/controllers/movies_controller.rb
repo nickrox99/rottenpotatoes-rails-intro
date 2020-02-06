@@ -12,10 +12,20 @@ class MoviesController < ApplicationController
 
   def index
     
+    # save the params ratings to session
+    if(params[:ratings])
+      session[:ratings] = params[:ratings]
+    end
+    
+    # save the params sort to session
+    if(params[:sort])
+      session[:sort] = params[:sort]
+    end
+    
     base = Movie.all
     # sort the movies based off of sort parameter
-    if(params[:sort])
-      sorter = params[:sort]
+    if(session[:sort])
+      sorter = session[:sort]
       @movies = base.order(sorter)
     end
     #@movies = Movie.all.order(sorter)
@@ -32,8 +42,8 @@ class MoviesController < ApplicationController
     # set the @all_ratings item to the result of all_rating (unique results)
     @all_ratings = Movie.all_ratings
     
-    if(params[:ratings])
-      rater = params[:ratings]
+    if(session[:ratings])
+      rater = session[:ratings]
       @checked_ratings = rater
       @movies = base.selected_ratings(rater)
     end
