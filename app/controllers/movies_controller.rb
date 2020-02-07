@@ -52,9 +52,6 @@ class MoviesController < ApplicationController
     
     # set the movies object to be the result of sorting and filtering
     @movies = base.all
-    if(session[:ratings].keys.empty? && params[:ratings].keys.empty?)
-      @movies = Movie.all
-    end
     
     # set the @all_ratings item to the result of all_rating (unique results)
     @all_ratings = Movie.all_ratings
