@@ -23,17 +23,7 @@ class MoviesController < ApplicationController
     end
     
     base = Movie
-    
-    
-    # highlight selected header
-    if(sorter == "title")
-      # set the title header class to hilite
-      @title_header = 'hilite'
-    elsif (sorter == "release_date")
-      # set the date header class to hilite
-      @date_header = 'hilite'
-    end
-    
+
     # filter movies based off ratings checkboxes
     if(session[:ratings])
       rater = session[:ratings]
@@ -45,6 +35,15 @@ class MoviesController < ApplicationController
     if(session[:sort])
       sorter = session[:sort]
       base = base.order(sorter)
+    end
+    
+    # highlight selected header
+    if(sorter == "title")
+      # set the title header class to hilite
+      @title_header = 'hilite'
+    elsif (sorter == "release_date")
+      # set the date header class to hilite
+      @date_header = 'hilite'
     end
     
     # set the movies object to be the result of sorting and filtering
