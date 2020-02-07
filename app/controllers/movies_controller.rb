@@ -11,8 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    
-    
+
     # save the params ratings to session
     if(params[:ratings])
       session[:ratings] = params[:ratings]
@@ -23,15 +22,8 @@ class MoviesController < ApplicationController
       session[:sort] = params[:sort]
     end
     
-    base = Movie.all
-    @movies = base
+    base = Movie
     
-    # sort the movies based off of sort parameter
-    if(session[:sort])
-      sorter = session[:sort]
-      @movies = base.order(sorter)
-    end
-    #@movies = Movie.all.order(sorter)
     
     # highlight selected header
     if(sorter == "title")
@@ -42,15 +34,34 @@ class MoviesController < ApplicationController
       @date_header = 'hilite'
     end
     
-    # set the @all_ratings item to the result of all_rating (unique results)
-    @all_ratings = Movie.all_ratings
-    
+    # filter movies based off ratings checkboxes
     if(session[:ratings])
       rater = session[:ratings]
       @checked_ratings = rater
-      @movies = base.selected_ratings(rater)
+      base = base.selected_ratings(rater)
     end
-      
+    
+    # sort the movies based off of sort parameter
+    if(session[:sort])
+      sorter = session[:sort]
+      base = base.order(sorter)
+    end
+    
+    # set the movies object to be the result of sorting and filtering
+    @movies = base.all
+    
+    # set the @all_ratings item to the result of all_rating (unique results)
+    @all_ratings = Movie.all_ratings
+    
+    
+    if(session [:ratings])
+      # keep filters 
+      @checked_boxes = session[:ratings]
+    else
+      # null hash representation if no filters saved in session
+      @checked_boxes = {}
+    end
+    
   end
   
   def new
