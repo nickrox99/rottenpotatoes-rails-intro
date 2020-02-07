@@ -52,7 +52,7 @@ class MoviesController < ApplicationController
     
     # set the movies object to be the result of sorting and filtering
     @movies = base.all
-    if(session[:ratings].empty? && params[:ratings].empty?)
+    if(session[:ratings].keys.empty? && params[:ratings].keys.empty?)
       @movies = Movie.all
     end
     
