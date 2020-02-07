@@ -27,7 +27,6 @@ class MoviesController < ApplicationController
     # filter movies based off ratings checkboxes
     if(session[:ratings])
       rater = session[:ratings]
-      @checked_ratings = rater
       base = base.selected_ratings(rater)
     end
     
@@ -67,7 +66,7 @@ class MoviesController < ApplicationController
     # default: render 'new' template
   end
 
-  def create
+  def creategit
     @movie = Movie.create!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully created."
     redirect_to movies_path
