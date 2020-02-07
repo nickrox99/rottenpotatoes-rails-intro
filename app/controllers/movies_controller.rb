@@ -53,7 +53,7 @@ class MoviesController < ApplicationController
     @all_ratings = Movie.all_ratings
     
     
-    if(session [:ratings])
+    if(session[:ratings])
       # keep filters 
       @checked_boxes = session[:ratings]
     else
