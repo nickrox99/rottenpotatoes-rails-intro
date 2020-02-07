@@ -5,13 +5,18 @@
   Include:
   - @all_ratings.each do |rating|
     = rating
+    -# @checked_boxes[rating].present? adapted from:
+      -# 1. https://blog.appsignal.com/2018/09/11/differences-between-nil-empty-blank-and-present.html
+      -# present is better for usage here than "empty"
     = check_box_tag "ratings[#{rating}]", value = '1', @checked_boxes[rating].present?, id: "ratings_#{rating}"
   = submit_tag 'Refresh', id: 'ratings_filter_submit'
 %table#movies.table.table-striped.col-md-12
   %thead 
     %tr
+      -# setting the class and id, linking to movie controller action 
       %th{:class=>@title_header, :id=> "title_header"}= link_to "Movie Titles", { :controller => "movies", :action => "index", :sort => "title" }
       %th Rating
+      -# setting the class and id, linking to movie controller action
       %th{:class=>@date_header, :id=>"date_header"}=link_to "Release Date", {:controller => "movies", :action =>"index", :sort => "release_date"}
       %th More Info
   %tbody

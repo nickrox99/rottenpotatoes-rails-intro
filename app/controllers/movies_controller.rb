@@ -15,11 +15,16 @@ class MoviesController < ApplicationController
     # save the params ratings to session
     if(params[:ratings])
       session[:ratings] = params[:ratings]
+    else
+      # delete the session variable if the ratings parameter is missing
+      session.delete(:ratings)
     end
     
     # save the params sort to session
     if(params[:sort])
       session[:sort] = params[:sort]
+    else
+      session.delete(:sort)
     end
     
     base = Movie
@@ -47,6 +52,9 @@ class MoviesController < ApplicationController
     
     # set the movies object to be the result of sorting and filtering
     @movies = base.all
+    if(session[:ratings].empty? && params[:ratings].empty?)
+      @movies = Movie.all
+    end
     
     # set the @all_ratings item to the result of all_rating (unique results)
     @all_ratings = Movie.all_ratings
